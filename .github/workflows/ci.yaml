@@ -33,19 +33,19 @@ jobs:
       - uses: tj-actions/changed-files@v44
         id: changed
         with:
-        files_yaml: |
-          linter:
-            - Cargo.toml
-            - Cargo.lock
-            - src/**
-            - .github/workflows/ci.yaml
-          formatter:
-            - Cargo.toml
-            - Cargo.lock
-            - src/*
-            - .github/workflows/ci.yaml
-          code:
-            - "**/*"
+          files_yaml: |
+            linter:
+              - Cargo.toml
+              - Cargo.lock
+              - src/**
+              - .github/workflows/ci.yaml
+            formatter:
+              - Cargo.toml
+              - Cargo.lock
+              - src/*
+              - .github/workflows/ci.yaml
+            code:
+              - "**/*"
 
   cargo-fmt:
     name: "cargo fmt"
