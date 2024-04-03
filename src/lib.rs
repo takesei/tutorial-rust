@@ -29,3 +29,34 @@ impl<'a> Config<'a> {
         })
     }
 }
+
+#[cfg(test)]
+mod test {
+    #[test]
+    fn one_result() {
+        let query: &str = "duct";
+        let contents = "Rust:
+Safe and fast and productive";
+
+        assert_eq!(
+            vec!["Safe and fast and productive"],
+            search(query, contents)
+        )
+    }
+
+    #[test]
+    fn some_result() {
+        let query: &str = "duct";
+        let contents = "Rust:
+Safe and fast and productive
+fast and productive and safe";
+
+        assert_eq!(
+            vec![
+                "Safe and fast and productive",
+                "fast and productive and safe"
+            ],
+            search(query, contents)
+        )
+    }
+}
