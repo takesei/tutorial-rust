@@ -11,7 +11,7 @@ pub fn run(conf: &Config) -> Result<String, Box<dyn Error>> {
 }
 
 pub struct Config<'a> {
-    pub fname: &'a String,
+    pub query: &'a str,
     pub path: &'a Path,
 }
 
@@ -20,11 +20,11 @@ impl<'a> Config<'a> {
         if args.len() < 3 {
             return Err("Size of the length must be three");
         }
-        let fname = &args[1];
+        let query = &args[1];
         let path = &args[2];
 
         Ok(Self {
-            fname,
+            query,
             path: Path::new(path),
         })
     }

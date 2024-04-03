@@ -13,11 +13,14 @@ fn main() {
         process::exit(1)
     });
 
-    println!("{}/{:?}", config.fname, config.path);
+    println!("{} -> {:?}", config.query, config.path);
 
     let contents = tutorial::run(&config).unwrap_or_else(|why: Box<dyn Error>| {
         println!("runtime error, got:{}", why);
         process::exit(1)
     });
     println!("{}", contents);
+
+    let result = tutorial::search(config.query, &contents);
+    println!("{:?}", result);
 }
