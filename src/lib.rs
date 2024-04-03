@@ -1,32 +1,35 @@
-use std::{error::Error, fs::File, io::Read, path::Path};
+use std::{error::Error, fs::File, io::Read};
 
 pub fn run(conf: &Config) -> Result<String, Box<dyn Error>> {
     let mut contents = String::new();
 
-    let mut f = File::open(conf.path)?;
+    let mut f = File::open(&conf.path)?;
 
     f.read_to_string(&mut contents)?;
 
     Ok(contents)
 }
 
-pub struct Config<'a> {
-    pub query: &'a str,
-    pub path: &'a Path,
+pub struct Config {
+    pub query: String,
+    pub path: String,
 }
 
-impl<'a> Config<'a> {
-    pub fn new(args: &'a [String]) -> Result<Self, &'static str> {
-        if args.len() < 3 {
-            return Err("Size of the length must be three");
-        }
-        let query = &args[1];
-        let path = &args[2];
+impl Config {
+    pub fn new(mut args: impl Iterator<Item = String>) -> Result<Self, &'static str> {
+        args.next();
 
-        Ok(Self {
-            query,
-            path: Path::new(path),
-        })
+        let query = match args.next() {
+            Some(val) => val,
+            None => return Err("Size of the length must be three"),
+        };
+
+        let path = match args.next() {
+            Some(val) => val,
+            None => return Err("Size of the length must be three"),
+        };
+
+        Ok(Self { query, path })
     }
 }
 

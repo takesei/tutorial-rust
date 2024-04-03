@@ -5,10 +5,10 @@ use tutorial::Config;
 
 fn main() {
     // tutorial::sample();
-    let args: Vec<String> = env::args().collect();
+    let args = env::args();
     println!("{:?}", args);
 
-    let config = Config::new(&args).unwrap_or_else(|why: &str| {
+    let config = Config::new(args).unwrap_or_else(|why: &str| {
         println!("Arguments parse failed, got:{}", why);
         process::exit(1)
     });
@@ -21,6 +21,6 @@ fn main() {
     });
     println!("{}", contents);
 
-    let result = tutorial::search(config.query, &contents);
+    let result = tutorial::search(&config.query, &contents);
     println!("{:?}", result);
 }
