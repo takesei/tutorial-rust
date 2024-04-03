@@ -14,7 +14,7 @@ env:
   RUSTUP_MAX_RETRIES: 10
 
 jobs:
-  determine-changes:
+  determine_changes:
     name: "Determine Changes"
     runs-on: ubuntu-latest
     outputs:
